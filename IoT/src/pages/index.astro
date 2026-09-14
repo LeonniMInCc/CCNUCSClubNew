@@ -1,0 +1,139 @@
+---
+import '../styles/global.css';
+import { groups } from '../data/groups';
+---
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="物联网协会 2026 招新：硬件、应用、算法，找到你的赛道。" />
+    <title>物联网协会 · 2026 招新</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="物联网协会首页">
+        <span class="brand-mark" aria-hidden="true">IO</span>
+        <span>物联网协会</span>
+      </a>
+      <nav class="desktop-nav" aria-label="主要导航">
+        <a href="#groups">三个组别</a>
+        <a href="#join">加入我们</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span>
+        <span class="sr-only">打开菜单</span>
+      </button>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="移动端导航">
+        <a href="#groups">三个组别</a>
+        <a href="#join">加入我们</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-image" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content reveal">
+          <p class="eyebrow">2026 RECRUITMENT / IOT ASSOCIATION</p>
+          <h1 id="hero-title">把世界<br /><em>连</em>起来。</h1>
+          <p class="hero-intro">三条路径，做出真实运行的作品。<br />现在，选择你的方向。</p>
+          <a class="scroll-cue" href="#groups"><span class="scroll-line"></span><span>向下探索</span></a>
+        </div>
+        <div class="hero-coordinates" aria-hidden="true"><span>22°17' N</span><span>113°34' E</span></div>
+        <div class="hero-index" aria-hidden="true">01 <span>/</span> 03</div>
+      </section>
+
+      <section class="intro-band reveal" aria-label="协会简介">
+        <p class="section-label">/ THE ASSOCIATION</p>
+        <p class="intro-copy">我们相信，最好的学习发生在<br /><strong>一起把问题做出来</strong>的时候。</p>
+        <p class="intro-note">从一块电路板，到一场比赛，<br />这里有同频的人，也有下一次出发。</p>
+      </section>
+
+      <section id="groups" class="groups-section">
+        <div class="groups-heading reveal">
+          <p class="section-label">/ FIND YOUR LANE</p>
+          <h2>三个组别，<br /><span>一条完整的链路。</span></h2>
+        </div>
+        <div class="group-nav" aria-label="组别导航">
+          {groups.map((group) => <a href={`#${group.id}`}><span>{group.number}</span>{group.name}</a>)}
+        </div>
+
+        {groups.map((group) => (
+          <article id={group.id} class="group-panel">
+            <div class="group-visual reveal">
+              <img src={group.image} alt={group.imageAlt} loading="lazy" />
+              <span class="visual-number">{group.number}</span>
+              <span class="visual-caption">{group.kicker}</span>
+            </div>
+            <div class="group-info reveal">
+              <p class="section-label">{group.number} / {group.kicker}</p>
+              <h3>{group.name}</h3>
+              <p class="group-description">{group.description}</p>
+              <div class="info-grid">
+                <div><p class="info-label">你会学到</p><ul>{group.learns.map((item) => <li>{item}</li>)}</ul></div>
+                <div><p class="info-label">我们拿过</p><ul>{group.awards.map((item) => <li>{item}</li>)}</ul></div>
+                <div><p class="info-label">下一站</p><ul>{group.races.map((item) => <li>{item}</li>)}</ul></div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section id="join" class="join-section reveal" aria-labelledby="join-title">
+        <div>
+          <p class="section-label">/ YOUR NEXT BUILD</p>
+          <h2 id="join-title">准备好，<br /><em>连</em>上我们。</h2>
+          <p class="join-copy">扫码加入群聊，领取招新说明与面试时间。</p>
+        </div>
+        <button class="qr-trigger" type="button" aria-label="查看群聊二维码" aria-controls="qr-modal">
+          <span class="qr-placeholder">QR</span>
+          <span>打开群聊二维码 <b>↗</b></span>
+        </button>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>物联网协会 / IOT ASSOCIATION</span><span>© 2026</span><span>KEEP CONNECTING</span></footer>
+
+    <div id="qr-modal" class="qr-modal" hidden role="dialog" aria-modal="true" aria-labelledby="qr-title">
+      <div class="modal-backdrop" data-close-modal></div>
+      <div class="modal-card">
+        <button class="modal-close" type="button" data-close-modal aria-label="关闭二维码">×</button>
+        <p class="section-label">/ JOIN THE CHAT</p>
+        <h2 id="qr-title">扫码加入群聊</h2>
+        <div class="qr-large" role="img" aria-label="群聊二维码占位图">QR<br /><small>替换为协会二维码</small></div>
+        <p>把二维码文件放入 <code>public/assets/group-qr.png</code> 即可替换。</p>
+      </div>
+    </div>
+
+    <script>
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealItems = document.querySelectorAll('.reveal');
+      if (reducedMotion) revealItems.forEach((item) => item.classList.add('is-visible'));
+      else {
+        const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+        }), { threshold: 0.16 });
+        revealItems.forEach((item) => observer.observe(item));
+      }
+
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mobileNav = document.querySelector('.mobile-nav');
+      menuToggle?.addEventListener('click', () => {
+        const open = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!open));
+        mobileNav?.classList.toggle('is-open', !open);
+      });
+      mobileNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+        menuToggle?.setAttribute('aria-expanded', 'false'); mobileNav.classList.remove('is-open');
+      }));
+
+      const modal = document.querySelector('#qr-modal');
+      const openModal = () => { modal.hidden = false; document.body.classList.add('modal-open'); modal.querySelector('.modal-close')?.focus(); };
+      const closeModal = () => { modal.hidden = true; document.body.classList.remove('modal-open'); };
+      document.querySelector('.qr-trigger')?.addEventListener('click', openModal);
+      modal?.querySelectorAll('[data-close-modal]').forEach((el) => el.addEventListener('click', closeModal));
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal && !modal.hidden) closeModal(); });
+    </script>
+  </body>
+</html>
