@@ -104,27 +104,13 @@ import { showcase } from '../data/showcase';
           <h2 id="join-title">准备好，<br /><em>了解</em>我们。</h2>
           <p class="join-copy">扫码加入群聊，咨询更多相关信息。</p>
         </div>
-        <button class="qr-trigger" type="button" aria-label="查看群聊二维码" aria-controls="qr-modal">
-          <span class="qr-placeholder">QR</span>
-          <span>打开群聊二维码 <b>↗</b></span>
-        </button>
+        <div class="qr-display">
+          <img src="/assets/group-qr.png.jpg" alt="群聊二维码" />
+        </div>
       </section>
     </main>
 
     <footer class="site-footer"><span>物联网协会 / IOT ASSOCIATION</span><span>© 2026</span><span>KEEP CONNECTING</span></footer>
-
-    <div id="qr-modal" class="qr-modal" hidden role="dialog" aria-modal="true" aria-labelledby="qr-title">
-      <div class="modal-backdrop" data-close-modal></div>
-      <div class="modal-card">
-        <button class="modal-close" type="button" data-close-modal aria-label="关闭二维码">×</button>
-        <p class="section-label">/ JOIN THE CHAT</p>
-        <h2 id="qr-title">扫码加入群聊</h2>
-        <div class="qr-large" role="img" aria-label="群聊二维码">
-          <img src="/assets/group-qr.png.jpg" alt="群聊二维码" />
-        </div>
-        <p>把二维码文件放入 <code>public/assets/group-qr.png</code> 即可替换。</p>
-      </div>
-    </div>
 
     <script>
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -147,13 +133,6 @@ import { showcase } from '../data/showcase';
       mobileNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
         menuToggle?.setAttribute('aria-expanded', 'false'); mobileNav.classList.remove('is-open');
       }));
-
-      const modal = document.querySelector('#qr-modal');
-      const openModal = () => { modal.hidden = false; document.body.classList.add('modal-open'); modal.querySelector('.modal-close')?.focus(); };
-      const closeModal = () => { modal.hidden = true; document.body.classList.remove('modal-open'); };
-      document.querySelector('.qr-trigger')?.addEventListener('click', openModal);
-      modal?.querySelectorAll('[data-close-modal]').forEach((el) => el.addEventListener('click', closeModal));
-      document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal && !modal.hidden) closeModal(); });
     </script>
   </body>
 </html>
