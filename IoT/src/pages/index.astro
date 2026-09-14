@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { groups } from '../data/groups';
+import { showcase } from '../data/showcase';
 ---
 
 <html lang="zh-CN">
@@ -18,6 +19,7 @@ import { groups } from '../data/groups';
       </a>
       <nav class="desktop-nav" aria-label="主要导航">
         <a href="#groups">三个组别</a>
+        <a href="#showcase">荣誉与照片</a>
         <a href="#join">加入我们</a>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
@@ -26,6 +28,7 @@ import { groups } from '../data/groups';
       </button>
       <nav id="mobile-nav" class="mobile-nav" aria-label="移动端导航">
         <a href="#groups">三个组别</a>
+        <a href="#showcase">荣誉与照片</a>
         <a href="#join">加入我们</a>
       </nav>
     </header>
@@ -36,8 +39,8 @@ import { groups } from '../data/groups';
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="hero-content reveal">
           <p class="eyebrow">2026 RECRUITMENT / IOT ASSOCIATION</p>
-          <h1 id="hero-title">把世界<br /><em>连</em>起来。</h1>
-          <p class="hero-intro">三条路径，做出真实运行的作品。<br />现在，选择你的方向。</p>
+          <h1 id="hero-title">把世界<br /><em>连接</em>起来。</h1>
+          <p class="hero-intro">三个方向，一起做出想法。<br />现在，选择你的方向。</p>
           <a class="scroll-cue" href="#groups"><span class="scroll-line"></span><span>向下探索</span></a>
         </div>
         <div class="hero-coordinates" aria-hidden="true"><span>22°17' N</span><span>113°34' E</span></div>
@@ -46,7 +49,7 @@ import { groups } from '../data/groups';
 
       <section class="intro-band reveal" aria-label="协会简介">
         <p class="section-label">/ THE ASSOCIATION</p>
-        <p class="intro-copy">我们相信，最好的学习发生在<br /><strong>一起把问题做出来</strong>的时候。</p>
+        <p class="intro-copy">我们相信，最好的学习是在<br /><strong>一起解决问题</strong>的时候。</p>
         <p class="intro-note">从一块电路板，到一场比赛，<br />这里有同频的人，也有下一次出发。</p>
       </section>
 
@@ -72,7 +75,6 @@ import { groups } from '../data/groups';
               <p class="group-description">{group.description}</p>
               <div class="info-grid">
                 <div><p class="info-label">你会学到</p><ul>{group.learns.map((item) => <li>{item}</li>)}</ul></div>
-                <div><p class="info-label">我们拿过</p><ul>{group.awards.map((item) => <li>{item}</li>)}</ul></div>
                 <div><p class="info-label">下一站</p><ul>{group.races.map((item) => <li>{item}</li>)}</ul></div>
               </div>
             </div>
@@ -80,11 +82,27 @@ import { groups } from '../data/groups';
         ))}
       </section>
 
+      <section id="showcase" class="showcase-section">
+        <div class="showcase-heading reveal">
+          <p class="section-label">/ WHAT WE'VE MADE</p>
+          <h2>荣誉与瞬间</h2>
+        </div>
+        <div class="drift-viewport reveal">
+          <div class="drift-track">
+            {[...showcase, ...showcase].map((item) => (
+              <figure class="drift-card">
+                <img src={item.image} alt={item.imageAlt} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="join" class="join-section reveal" aria-labelledby="join-title">
         <div>
           <p class="section-label">/ YOUR NEXT BUILD</p>
-          <h2 id="join-title">准备好，<br /><em>连</em>上我们。</h2>
-          <p class="join-copy">扫码加入群聊，领取招新说明与面试时间。</p>
+          <h2 id="join-title">准备好，<br /><em>了解</em>我们。</h2>
+          <p class="join-copy">扫码加入群聊，咨询更多相关信息。</p>
         </div>
         <button class="qr-trigger" type="button" aria-label="查看群聊二维码" aria-controls="qr-modal">
           <span class="qr-placeholder">QR</span>
@@ -101,7 +119,9 @@ import { groups } from '../data/groups';
         <button class="modal-close" type="button" data-close-modal aria-label="关闭二维码">×</button>
         <p class="section-label">/ JOIN THE CHAT</p>
         <h2 id="qr-title">扫码加入群聊</h2>
-        <div class="qr-large" role="img" aria-label="群聊二维码占位图">QR<br /><small>替换为协会二维码</small></div>
+        <div class="qr-large" role="img" aria-label="群聊二维码">
+          <img src="/assets/group-qr.png.jpg" alt="群聊二维码" />
+        </div>
         <p>把二维码文件放入 <code>public/assets/group-qr.png</code> 即可替换。</p>
       </div>
     </div>
